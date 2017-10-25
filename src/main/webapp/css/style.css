@@ -1,0 +1,33 @@
+.logoImage{
+	width: 800px;
+}
+.contentContainer{
+	display:flex;
+	padding: 15px;
+}
+.imageContainer{
+	flex:1;	
+}
+.parkInfo{
+	flex:1;
+	padding: 15px;
+}
+.parkInfo h2 a{
+	text-decoration: none;
+	color: black;
+}
+nav ul{
+	width:100%;
+	display: flex;
+	justify-content:flex-start;
+}
+nav ul li{
+	list-style:none;
+	text-align: left;
+	flex-grow: 1;
+	max-width: 150px;
+}
+li a {
+	text-decoration: none;
+	font-size: 18px;
+}
