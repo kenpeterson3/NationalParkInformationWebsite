@@ -37,8 +37,10 @@
 
 <div class="currentWeather">
 <h3>Today</h3>
-<c:url var="weatherImage" value="/img/weather/${parkWeather.forecast}.png"/>
-<img src="${weatherImage}"/>
+<%-- <c:url var="weatherImage" value="/img/weather/${parkWeather.forecast}.png"/>
+<img src="${weatherImage}"/> --%>
+
+<c:out value="${parkWeather.value.high}"/>
 </div>
 
 <div class="futureWeatherForecast">

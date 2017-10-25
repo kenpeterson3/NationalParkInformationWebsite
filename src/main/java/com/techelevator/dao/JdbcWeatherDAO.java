@@ -30,7 +30,8 @@ public class JdbcWeatherDAO implements WeatherDAO {
 		
 		return parkWeather;
 	}
-		private Weather mapRowToWeather(SqlRowSet row){
+		
+	private Weather mapRowToWeather(SqlRowSet row){
 			Weather newWeather = new Weather();
 			newWeather.setFiveDayForcastValue(row.getInt("fivedayforecastvalue"));
 			newWeather.setForecast(row.getString("forecast"));

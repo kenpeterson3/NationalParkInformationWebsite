@@ -23,18 +23,5 @@
        <c:url var="surveyLink" value="/survey" />
     <li><a href="${surveyLink }">Survey</a></li>
     </ul>
-    
-    <button onclick="myFunction()">Metric</button>
-<button onclick="myFunction1()">Imperial</button>
-
-<span id="demo"><c:out value="${uom}"/></span>
-
-<script>
-function myFunction() {
-document.getElementById("demo").innerHTML = "<c:set var="uom" value="metric" />";
-function myFunction1() {
-document.getElementById("demo").innerHTML = "<c:set var="uom" value="imperial" />";
-}
-</script>
-    
+  
     </nav>
