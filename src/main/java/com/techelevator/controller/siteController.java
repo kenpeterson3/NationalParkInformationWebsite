@@ -36,12 +36,13 @@ public class siteController {
 		
 	}
 	@RequestMapping(path="/parkDetail/{parkCode}",method=RequestMethod.GET)
-	public String showParkDetail(@PathVariable String parkCode, ModelMap modelHolder){
+	public String showParkDetail(@PathVariable String parkCode, HttpSession session, ModelMap modelHolder){
 		Park newPark = parkDao.getParkByParkCode(parkCode);
 		modelHolder.put("park", newPark);
 		List<Weather> newWeatherList = weatherDao.getWeatherByParkcode(parkCode);
 		modelHolder.put("parkWeather", newWeatherList);
-		
+		boolean convert = false;
+		session.setAttribute("weatherConversion", convert);
 		
 		return "parkDetail";
 	}
