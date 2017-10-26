@@ -7,9 +7,9 @@ public class Park {
 	private String parkCode;
 	private String parkName;
 	private String state;
-	private long acreage;
-	private int elevationInFeet;
-	private double milesOfTrail;
+	private BigDecimal acreage;
+	private BigDecimal elevationInFeet;
+	private BigDecimal milesOfTrail;
 	private int numberOfCampsites;
 	private String climate;
 	private String yearFounded;
@@ -39,22 +39,22 @@ public class Park {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public long getAcreage() {
+	public BigDecimal getAcreage() {
 		return acreage;
 	}
-	public void setAcreage(long acreage) {
+	public void setAcreage(BigDecimal acreage) {
 		this.acreage = acreage;
 	}
-	public int getElevationInFeet() {
+	public BigDecimal getElevationInFeet() {
 		return elevationInFeet;
 	}
-	public void setElevationInFeet(int elevationInFeet) {
+	public void setElevationInFeet(BigDecimal elevationInFeet) {
 		this.elevationInFeet = elevationInFeet;
 	}
-	public double getMilesOfTrail() {
+	public BigDecimal getMilesOfTrail() {
 		return milesOfTrail;
 	}
-	public void setMilesOfTrail(double milesOfTrail) {
+	public void setMilesOfTrail(BigDecimal milesOfTrail) {
 		this.milesOfTrail = milesOfTrail;
 	}
 	public int getNumberOfCampsites() {

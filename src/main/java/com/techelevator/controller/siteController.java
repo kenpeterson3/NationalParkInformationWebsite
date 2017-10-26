@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.dao.ParkDAO;
 import com.techelevator.dao.WeatherDAO;
@@ -45,13 +45,10 @@ public class siteController {
 		
 		return "parkDetail";
 	}
-//	@RequestMapping(path="/parkDetail/{parkCode,unitOfMeasure}",method=RequestMethod.POST)
-//	public String showParkDetailWithConversion(@PathVariable String parkCode,@PathVariable String unitOfMeasure, HttpSession session){
-//		//Park newPark = parkDao.getParkByParkCode(parkCode);
-//		//session.setAttribute("park", newPark);
-//		List<Weather> newWeatherList = weatherDao.getWeatherByParkcode(parkCode);
-//		session.setAttribute("parkWeather", newWeatherList);
-//		
-//		return "parkDetail";
-//	}
+	@RequestMapping(path="/parkDetail/{parkCode}",method=RequestMethod.POST)
+	public String showParkDetailWithConversion(@PathVariable String parkCode, @RequestParam String convert, HttpSession session, ModelMap modelHolder){
+		session.setAttribute("weatherConversion", convert);
+		
+		return "redirect:/parkDetail/" + parkCode;
+	}
 }

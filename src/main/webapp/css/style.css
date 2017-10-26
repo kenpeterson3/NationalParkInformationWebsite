@@ -31,3 +31,33 @@ li a {
 	text-decoration: none;
 	font-size: 18px;
 }
+.weatherContainer{
+	display: flex;
+}
+.currentWeatherContainer{
+	display: flex;
+	flex:1;
+}
+.currentWeatherInfo{
+	justify-content: center;
+}
+.fourDayWeatherContainer{
+	display: flex;
+	flex:3;
+}
+.individualForecasts{
+	flex:1;
+	justify-content: space-around;
+	align-content: flex-end;
+}
+.individualWeatherInfo {
+	justify-content: center;
+	align-content: flex-end;
+}
+.individualImage {
+	justify-content: center;
+	align-content: flex-end;
+}
+.individualImage img {
+	width: 125px;
+}
