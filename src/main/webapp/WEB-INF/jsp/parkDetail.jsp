@@ -2,11 +2,15 @@
 
 <%@include file="common/header.jsp" %>
 
+<%-- <c:catch var="convert">${weatherConversion.convert}</c:catch> --%>
+<%-- 	<c:if test="${not empty exception}"> --%>
+<%-- 		<c:set var="convert" value="false"/> --%>
+<%-- 	</c:if> --%>
+
 <h2><c:out value="${park.parkName}"/></h2>
 
 <div>
-	<c:url var="imageLink"
-		value="/img/parks/${park.parkCode.toLowerCase() }.jpg" />
+	<c:url var="imageLink" value="/img/parks/${park.parkCode.toLowerCase() }.jpg" />
 	<img src="${imageLink }" />
 </div>
 
@@ -33,16 +37,17 @@
 		<c:when test="${weatherConversion.convert == true }">
 			<p>
 				Acreage:
-				<c:out value="${Conversion.sqMilesToSqKilometers(park.acreage)}" />
-				square miles
+				<c:out value="${Conversion.sqMilesToSqKilometers(park.acreage)}" /> sq Km
 			</p>
 		</c:when>
+		<c:otherwise>
+			<p>
+				Acreage:
+				<c:out value="${park.acreage}" />
+				sq mi
+			</p>		
+		</c:otherwise>
 	</c:choose>
-	<p>
-		Acreage:
-		<c:out value="${park.acreage}" />
-		square miles
-	</p>
 	<p>
 		Established:
 		<c:out value="${park.yearFounded }" />
@@ -51,11 +56,18 @@
 		Number of Visitors:
 		<c:out value="${park.annualVisitorCount }" />
 	</p>
-	<p>
-		Elevation:
-		<c:out value="${park.elevationInFeet }" />
-		ft.
-	</p>
+	<c:choose>
+		<c:when test="${weatherConversion.convert == true }">
+			<p>
+				Elevation: <c:out value="${Conversion.ftToMeters(park.elevationInFeet) }" /> meters
+		</c:when>
+		<c:otherwise>
+			<p>
+				Elevation: <c:out value="${park.elevationInFeet }" /> ft.
+			</p>
+		</c:otherwise>
+	</c:choose>
+
 	<p>
 		Total Miles of Trails:
 		<c:out value="${park.milesOfTrail }" />
@@ -84,7 +96,7 @@
 			<div class="currentWeatherImage">
 				<h3>Today</h3>
 				<c:url var="weatherImage"
-					value="/img/weather/${parkWeather[0].getParsedForecast()}.png" />
+					value="/img/weather/${parkWeather[0].forecast}.png" />
 				<img src="${weatherImage}" />
 			</div>
 			<div class="currentWeatherInfo">
@@ -95,8 +107,8 @@
 			</div>
 			<c:url var="conversionSubmit" value="/parkDetail/${park.parkCode}" />
 			<form method="post" action="${conversionSubmit }">
-				<input type="radio" name="convert" value="True">Celcius <input
-					type="radio" name="convert" value="False">Fahrenheit <input
+				<input type="radio" name="convert" value=true>Celcius <input
+					type="radio" name="convert" value=false>Fahrenheit <input
 					type="submit">
 			</form>
 

@@ -19,7 +19,7 @@ import com.techelevator.model.Park;
 import com.techelevator.model.Weather;
 
 @Controller
-//@SessionAttributes("weather")
+
 public class siteController {
 	
 	@Autowired
