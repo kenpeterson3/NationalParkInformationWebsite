@@ -101,15 +101,10 @@ public class Weather {
 	public void setWeatherMessage(String weatherMessage) {
 		this.weatherMessage = weatherMessage;
 	}
-	public String getParsedForcast() {
-		String parsedForcast = null;
+	public String getParsedForecast() {
+		String parsedForecast = forecast.replace(" ", "");
 		
-		for (String temp : forecast.split("\\s+")) {
-			temp += temp;
-			parsedForcast += temp;
-		}
-		System.out.println(parsedForcast);
-		return parsedForcast;
+		return parsedForecast;
 	}
 
 	

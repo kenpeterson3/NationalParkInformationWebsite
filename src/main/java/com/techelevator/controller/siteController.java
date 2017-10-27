@@ -1,5 +1,7 @@
 package com.techelevator.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.dao.ParkDAO;
 import com.techelevator.dao.WeatherDAO;
+import com.techelevator.model.Conversion;
 import com.techelevator.model.Park;
 import com.techelevator.model.Weather;
 
@@ -37,18 +40,43 @@ public class siteController {
 	}
 	@RequestMapping(path="/parkDetail/{parkCode}",method=RequestMethod.GET)
 	public String showParkDetail(@PathVariable String parkCode, HttpSession session, ModelMap modelHolder){
-		Park newPark = parkDao.getParkByParkCode(parkCode);
-		modelHolder.put("park", newPark);
-		List<Weather> newWeatherList = weatherDao.getWeatherByParkcode(parkCode);
-		modelHolder.put("parkWeather", newWeatherList);
-		boolean convert = false;
-		session.setAttribute("weatherConversion", convert);
+		String convert = (String) session.getAttribute("convert");
+		if (convert == null) {
+			convert ="F";
+			session.setAttribute("convert", convert);
+		}
 		
+		List<Weather> newWeatherList = weatherDao.getWeatherByParkcode(parkCode);
+		Park newPark = parkDao.getParkByParkCode(parkCode);		
+		
+		if (convert.equals("C")) {
+			for (Weather tempWeather : newWeatherList) {
+				int tempVar;
+				tempVar = (int) Conversion.convertFtoC(tempWeather.getHigh());
+				tempWeather.setHigh(tempVar);
+				tempVar = (int) Conversion.convertFtoC(tempWeather.getLow());
+				tempWeather.setLow(tempVar);
+			}
+				BigDecimal tempBigD = Conversion.sqMilesToSqKilometers(newPark.getAcreage());
+				newPark.setAcreage(tempBigD.setScale(0, RoundingMode.HALF_UP));
+				tempBigD = Conversion.ftToMeters(newPark.getElevationInFeet());
+				newPark.setElevationInFeet(tempBigD.setScale(0, RoundingMode.HALF_UP));
+				tempBigD =  Conversion.milesToKm(newPark.getMilesOfTrail());
+				newPark.setMilesOfTrail(tempBigD.setScale(0, RoundingMode.HALF_UP));
+
+			
+		}
+		
+		
+		modelHolder.put("park", newPark);
+		modelHolder.put("parkWeather", newWeatherList);
+		
+
 		return "parkDetail";
 	}
 	@RequestMapping(path="/parkDetail/{parkCode}",method=RequestMethod.POST)
 	public String showParkDetailWithConversion(@PathVariable String parkCode, @RequestParam String convert, HttpSession session, ModelMap modelHolder){
-		session.setAttribute("weatherConversion", convert);
+		session.setAttribute("convert", convert);
 		
 		return "redirect:/parkDetail/" + parkCode;
 	}

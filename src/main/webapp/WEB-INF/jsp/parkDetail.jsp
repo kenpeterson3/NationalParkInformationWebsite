@@ -2,10 +2,6 @@
 
 <%@include file="common/header.jsp" %>
 
-<%-- <c:catch var="convert">${weatherConversion.convert}</c:catch> --%>
-<%-- 	<c:if test="${not empty exception}"> --%>
-<%-- 		<c:set var="convert" value="false"/> --%>
-<%-- 	</c:if> --%>
 
 <h2><c:out value="${park.parkName}"/></h2>
 
@@ -33,21 +29,10 @@
 		State:
 		<c:out value="${park.state }" />
 	</p>
-	<c:choose>
-		<c:when test="${weatherConversion.convert == true }">
 			<p>
 				Acreage:
-				<c:out value="${Conversion.sqMilesToSqKilometers(park.acreage)}" /> sq Km
+				<c:out value="${park.acreage}" /> sq Km
 			</p>
-		</c:when>
-		<c:otherwise>
-			<p>
-				Acreage:
-				<c:out value="${park.acreage}" />
-				sq mi
-			</p>		
-		</c:otherwise>
-	</c:choose>
 	<p>
 		Established:
 		<c:out value="${park.yearFounded }" />
@@ -56,33 +41,21 @@
 		Number of Visitors:
 		<c:out value="${park.annualVisitorCount }" />
 	</p>
-	<c:choose>
-		<c:when test="${weatherConversion.convert == true }">
-			<p>
-				Elevation: <c:out value="${Conversion.ftToMeters(park.elevationInFeet) }" /> meters
-		</c:when>
-		<c:otherwise>
 			<p>
 				Elevation: <c:out value="${park.elevationInFeet }" /> ft.
 			</p>
-		</c:otherwise>
-	</c:choose>
-
 	<p>
 		Total Miles of Trails:
 		<c:out value="${park.milesOfTrail }" />
 	</p>
-	<c:choose>
-		<c:when test="${park.numberOfCampsites == 0 }">
+
 			<p>Total Number of Campsites: No Campsites Available</p>
-		</c:when>
-		<c:otherwise>
+
 			<p>
 				Total Number of Campsites:
 				<c:out value="${park.numberOfCampsites }" />
 			</p>
-		</c:otherwise>
-	</c:choose>
+
 	<p>
 		Total Number of Animal Species:
 		<c:out value="${park.numberOfAnimalSpecies }" />
@@ -96,19 +69,17 @@
 			<div class="currentWeatherImage">
 				<h3>Today</h3>
 				<c:url var="weatherImage"
-					value="/img/weather/${parkWeather[0].forecast}.png" />
+					value="/img/weather/${parkWeather[0].parsedForecast}.png" />
 				<img src="${weatherImage}" />
 			</div>
 			<div class="currentWeatherInfo">
-				High:
-				<c:out value="${parkWeather[0].high}" />
-				Low:
-				<c:out value="${parkWeather[0].low}" />
+				<div> High: <c:out value="${parkWeather[0].high}" /> </div>
+				<div> Low: <c:out value="${parkWeather[0].low}" /> </div>
 			</div>
 			<c:url var="conversionSubmit" value="/parkDetail/${park.parkCode}" />
 			<form method="post" action="${conversionSubmit }">
-				<input type="radio" name="convert" value=true>Celcius <input
-					type="radio" name="convert" value=false>Fahrenheit <input
+				<input type="radio" name="convert" value="C">Celcius <input
+					type="radio" name="convert" value="F">Fahrenheit <input
 					type="submit">
 			</form>
 
@@ -122,12 +93,12 @@
 				<c:if test="${forecastWeather.fiveDayForcastValue > 0}">
 					<div class="individualForecasts">
 						<div class="individualImage">
-							<c:url var="weatherImage" value="/img/weather/${forecastWeather.forecast}.png" />
+							<c:url var="weatherImage" value="/img/weather/${forecastWeather.parsedForecast}.png" />
 							<img src="${weatherImage}" />
 						</div>
 						<div class="individualWeatherInfo">
-							High: <c:out value="${forecastWeather.high}" />
-							Low: <c:out value="${forecastWeather.low}" />
+							<div>  High: <c:out value="${forecastWeather.high}" /> </div>
+							<div> Low: <c:out value="${forecastWeather.low}" /> </div>
 						</div>
 					</div>
 				</c:if>

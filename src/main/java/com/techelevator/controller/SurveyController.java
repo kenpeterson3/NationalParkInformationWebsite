@@ -1,5 +1,9 @@
 package com.techelevator.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.dao.ParkDAO;
 import com.techelevator.dao.SurveyDAO;
+import com.techelevator.model.Park;
 import com.techelevator.model.Survey;
 
 @Controller
@@ -49,9 +53,14 @@ public class SurveyController {
 	}
 	
 	@RequestMapping(path="/confirmation",method=RequestMethod.GET)
-	public String showConfirmation(@RequestParam String parkCode, @RequestParam Integer parkCount, ModelMap modelHolder) {
-		//finish getting top parks.
+	public String showConfirmation(ModelMap modelHolder) {
+		Map<String, Integer> topParks = surveyDao.getFavoritePark();
+		List<Park> parkList = new ArrayList<>();
 		
+		for(String entry: topParks) {
+			parkList.add(parkDao.getParkByParkCode(entry));
+		}
+		 
 		
 		return "confirmation";
 	}

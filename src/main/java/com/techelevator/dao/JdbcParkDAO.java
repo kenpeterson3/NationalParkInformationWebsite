@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +53,9 @@ private JdbcTemplate jdbcTemplate;
 		newPark.setParkCode(row.getString("parkcode"));
 		newPark.setParkName(row.getString("parkname"));
 		newPark.setState(row.getString("state"));
-		newPark.setAcreage(row.getBigDecimal("acreage")); 
-		newPark.setElevationInFeet(row.getBigDecimal("elevationinfeet"));
-		newPark.setMilesOfTrail(row.getBigDecimal("milesoftrail"));
+		newPark.setAcreage(row.getBigDecimal("acreage").setScale(2, RoundingMode.HALF_UP)); 
+		newPark.setElevationInFeet(row.getBigDecimal("elevationinfeet").setScale(2, RoundingMode.HALF_UP));
+		newPark.setMilesOfTrail(row.getBigDecimal("milesoftrail").setScale(2, RoundingMode.HALF_UP));
 		newPark.setNumberOfCampsites(row.getInt("numberofcampsites"));
 		newPark.setClimate(row.getString("climate"));
 		newPark.setYearFounded(row.getString("yearfounded"));
@@ -62,7 +63,7 @@ private JdbcTemplate jdbcTemplate;
 		newPark.setInspirationalQuote(row.getString("inspirationalquote"));
 		newPark.setInspirationalQuoteSource(row.getString("inspirationalquotesource"));
 		newPark.setParkDescription(row.getString("parkdescription"));
-		newPark.setEntryFee(row.getBigDecimal("entryfee"));
+		newPark.setEntryFee(row.getBigDecimal("entryfee").setScale(2, RoundingMode.HALF_UP));
 		newPark.setNumberOfAnimalSpecies(row.getInt("numberofanimalspecies"));
 		
 		return newPark;

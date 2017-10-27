@@ -39,7 +39,9 @@ li a {
 	flex:1;
 }
 .currentWeatherInfo{
+	display: inline-flex;
 	justify-content: center;
+	padding: 5px;
 }
 .fourDayWeatherContainer{
 	display: flex;
@@ -52,7 +54,7 @@ li a {
 }
 .individualWeatherInfo {
 	justify-content: center;
-	align-content: flex-end;
+	align-content: center;
 }
 .individualImage {
 	justify-content: center;
