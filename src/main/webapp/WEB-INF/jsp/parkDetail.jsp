@@ -21,17 +21,24 @@
 	<p>
 		<c:out value="${park.parkDescription }" />
 	</p>
-	<p>
-		Entry Fee: $
-		<c:out value="${park.entryFee }" />
-	</p>
+	<c:choose>
+		<c:when test="${park.entryFee == '0.00' }" >	
+			<p> Entry Fee: Free! </p>
+		</c:when>
+		<c:otherwise>	
+			<p>
+				Entry Fee: $
+				<c:out value="${park.entryFee }" />
+			</p>
+		</c:otherwise>
+	</c:choose>
 	<p>
 		State:
 		<c:out value="${park.state }" />
 	</p>
 			<p>
 				Acreage:
-				<c:out value="${park.acreage}" /> sq Km
+				<c:out value="${park.acreage}" /> <c:choose> <c:when test="${convert == 'C' }"> sq km</c:when><c:otherwise>sq. mi.</c:otherwise></c:choose>
 			</p>
 	<p>
 		Established:
@@ -42,20 +49,23 @@
 		<c:out value="${park.annualVisitorCount }" />
 	</p>
 			<p>
-				Elevation: <c:out value="${park.elevationInFeet }" /> ft.
+				Elevation: <c:out value="${park.elevationInFeet }" /> <c:choose> <c:when test="${convert == 'C' }"> m</c:when><c:otherwise>ft.</c:otherwise></c:choose>
 			</p>
 	<p>
 		Total Miles of Trails:
-		<c:out value="${park.milesOfTrail }" />
+		<c:out value="${park.milesOfTrail }" /> <c:choose> <c:when test="${convert == 'C' }"> km</c:when><c:otherwise>mi.</c:otherwise></c:choose>
 	</p>
-
+	<c:choose>
+		<c:when test="${park.numberOfCampsites == 0 }" >
 			<p>Total Number of Campsites: No Campsites Available</p>
-
+		</c:when>
+		<c:otherwise>
 			<p>
 				Total Number of Campsites:
 				<c:out value="${park.numberOfCampsites }" />
 			</p>
-
+		</c:otherwise>
+	</c:choose>
 	<p>
 		Total Number of Animal Species:
 		<c:out value="${park.numberOfAnimalSpecies }" />
@@ -73,8 +83,8 @@
 				<img src="${weatherImage}" />
 			</div>
 			<div class="currentWeatherInfo">
-				<div> High: <c:out value="${parkWeather[0].high}" /> </div>
-				<div> Low: <c:out value="${parkWeather[0].low}" /> </div>
+				<div class="weatherTemp"> High: <c:out value="${parkWeather[0].high}" /> </div>
+				<div class="weatherTemp"> Low: <c:out value="${parkWeather[0].low}" /> </div>
 			</div>
 			<c:url var="conversionSubmit" value="/parkDetail/${park.parkCode}" />
 			<form method="post" action="${conversionSubmit }">
@@ -84,7 +94,7 @@
 			</form>
 
 			<p>
-				<c:out value="${parkWeather[0].weatherMessage}" />
+				<strong><c:out value="${parkWeather[0].weatherMessage}" /></strong>
 			</p>
 		</div>
 

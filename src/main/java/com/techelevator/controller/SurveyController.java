@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.validation.Valid;
 
@@ -55,13 +55,28 @@ public class SurveyController {
 	@RequestMapping(path="/confirmation",method=RequestMethod.GET)
 	public String showConfirmation(ModelMap modelHolder) {
 		Map<String, Integer> topParks = surveyDao.getFavoritePark();
-		List<Park> parkList = new ArrayList<>();
+		Map<String, Park> parkList= new HashMap<>();
 		
-		for(String entry: topParks) {
-			parkList.add(parkDao.getParkByParkCode(entry));
+		for(Entry<String, Integer> entry : topParks.entrySet()) {
+			parkList.put(entry.getKey(),parkDao.getParkByParkCode(entry.getKey()));
 		}
-		 
+		 modelHolder.put("topParks", topParks);
+		 modelHolder.put("parkList", parkList);
 		
 		return "confirmation";
+	}
+	
+	@RequestMapping(path="/topParks",method=RequestMethod.GET)
+	public String showTopParks(ModelMap modelHolder) {
+		Map<String, Integer> topParks = surveyDao.getFavoritePark();
+		Map<String, Park> parkList= new HashMap<>();
+		
+		for(Entry<String, Integer> entry : topParks.entrySet()) {
+			parkList.put(entry.getKey(),parkDao.getParkByParkCode(entry.getKey()));
+		}
+		 modelHolder.put("topParks", topParks);
+		 modelHolder.put("parkList", parkList);
+		
+		return "topParks";
 	}
 }

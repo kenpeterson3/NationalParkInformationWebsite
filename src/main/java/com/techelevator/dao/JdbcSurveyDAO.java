@@ -34,7 +34,7 @@ public class JdbcSurveyDAO implements SurveyDAO {
 		Map<String, Integer> favoriteParks = new HashMap<>();
 		String sqlSelectTopFiveParks = "SELECT parkcode, COUNT(parkcode) AS countpark FROM survey_result GROUP BY parkcode ORDER BY countpark DESC LIMIT 5";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectTopFiveParks);
-		if (results.next()){
+		while (results.next()){
 			favoriteParks.put(results.getString("parkcode"), results.getInt("countpark"));
 			
 		}

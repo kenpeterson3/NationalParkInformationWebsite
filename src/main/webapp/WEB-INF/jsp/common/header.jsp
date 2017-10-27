@@ -22,6 +22,8 @@
     <li><a href="${homeLink }">Home</a></li>
        <c:url var="surveyLink" value="/survey" />
     <li><a href="${surveyLink }">Survey</a></li>
+           <c:url var="topParksLink" value="/topParks" />
+    <li><a href="${topParksLink }">Top Parks</a></li>
     </ul>
   
     </nav>

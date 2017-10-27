@@ -2,7 +2,6 @@
 
 <%@include file="common/header.jsp" %>
 
-<p>Thank you for your survey!</p>
 <table class="topParksTable">
 		<tr> 
 			<th>&nbsp;</th> <th>&nbsp;</th> <th>Number of responses</th>
@@ -10,7 +9,7 @@
 	<c:forEach items="${topParks}" var="park">
 
 		<tr> 
-			<td > 
+			<td class="congratsImage"> 
 				<c:url var="imageLink" value="/img/parks/${park.key.toLowerCase() }.jpg" />
 				<img src="${imageLink }" class="congratsImage"/>
 			</td>

@@ -1,3 +1,7 @@
+body {
+	background-color: #F8ECC2;
+	font-size: 1.25em;
+}
 .logoImage{
 	width: 800px;
 }
@@ -16,16 +20,33 @@
 	text-decoration: none;
 	color: black;
 }
+
+nav {
+	background-color: #5d3a0a;
+	
+	margin-bottom: 20px;
+	padding: 5px;
+	height: 3.5em;
+}
 nav ul{
 	width:100%;
 	display: flex;
 	justify-content:flex-start;
+	align-items: middle;
 }
 nav ul li{
 	list-style:none;
 	text-align: left;
 	flex-grow: 1;
 	max-width: 150px;
+	
+}
+nav ul li a {
+	color: #62ca11;
+	font-size: 22px;
+}
+nav ul li a:hover {
+	color: #bc3423;
 }
 li a {
 	text-decoration: none;
@@ -33,24 +54,36 @@ li a {
 }
 .weatherContainer{
 	display: flex;
+	padding: 5px;
 }
 .currentWeatherContainer{
 	display: flex;
+	padding: 5px;
 	flex:1;
+}
+.weatherTemp {
+	padding: 5px;
+	margin: 5px;
 }
 .currentWeatherInfo{
 	display: inline-flex;
 	justify-content: center;
 	padding: 5px;
 }
+.currentWeatherImage h3 {
+	text-align: center;
+}
 .fourDayWeatherContainer{
 	display: flex;
 	flex:3;
+	margin: 20px;
+	flex-direction: row;
 }
 .individualForecasts{
 	flex:1;
-	justify-content: space-around;
-	align-content: flex-end;
+	justify-content: center;
+	vertical-align: bottom;
+	text-align: center;
 }
 .individualWeatherInfo {
 	justify-content: center;
@@ -62,4 +95,11 @@ li a {
 }
 .individualImage img {
 	width: 125px;
+}
+.congratsImage {
+	width: 250px;
+}
+.topParksTable {
+	padding: 5px;
+	text-align: center;
 }

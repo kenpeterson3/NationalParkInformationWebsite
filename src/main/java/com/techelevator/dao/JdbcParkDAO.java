@@ -48,6 +48,8 @@ private JdbcTemplate jdbcTemplate;
 		return newPark;
 	}
 	
+
+	
 	private Park mapRowToPark(SqlRowSet row){
 		Park newPark = new Park();
 		newPark.setParkCode(row.getString("parkcode"));
@@ -68,5 +70,6 @@ private JdbcTemplate jdbcTemplate;
 		
 		return newPark;
 	}
+
 
 }
